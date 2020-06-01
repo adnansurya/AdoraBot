@@ -2,8 +2,7 @@
 <?php 
 
 include 'secret.php';
-$hologram_id = '-1001195370799';
-$admin_id = '108488036';
+
 
 
 
