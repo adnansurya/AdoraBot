@@ -1,9 +1,9 @@
 
 <?php 
 
-$token = '1115765927:AAFgDI003Xn41tererJRuoU543tBsg8CBpE';
+include 'secret.php';
 $hologram_id = '-1001195370799';
-$adnan_id = '108488036';
+$admin_id = '108488036';
 
 
 

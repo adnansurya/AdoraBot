@@ -154,10 +154,6 @@ if($chat_id !== $user_id){
 
 
 
-
-
-
-
 sendMessage($chat_id, $pesan, $token);
 
 ?>
