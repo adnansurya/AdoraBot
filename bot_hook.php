@@ -4,8 +4,6 @@ include 'db_access.php';
 include 'global.php';
 
 
-// $chat_id = $adnan_id;
-
 $getter = file_get_contents("php://input");
 
 $update = json_decode($getter, TRUE);
@@ -21,6 +19,14 @@ $last_name = $update["message"]["from"]["last_name"];
 $timestamp = date_timestamp_get($date);
 
 $save_msg = "INSERT INTO AdoraBot_message(acc_id,message,time) VALUES ('$user_id','$message','$waktu')";
+
+if($user_id != $admin_id){
+    $admin_msg = "ADMIN_LOG : " .PHP_EOL. "From : " .$user_id. " (@".$username.")". PHP_EOL .$first_name. " " .$last_name. PHP_EOL .$message;   
+    sendMessage($admin_id,$admin_msg, $token);
+}
+
+
+
 if (!mysqli_query($conn,$save_msg)){            
     $pesan = 'Bete akunya, gak bisa nyimpan histori obrolan kita -_-';
     sendMessage($chat_id, $pesan, $token);
@@ -145,6 +151,18 @@ if($chat_id !== $user_id){
             $pesan = 'Kok perangkatnya gak bisa dihapus ya? :/';
         }
 
+    }elseif(getComm($message, '/admin')){  
+        $subcomm = substr($message, 7);
+        if($user_id != $admin_id){
+            $pesan = 'Maaf kak, command itu hanya untuk admin :)';
+        }else{
+            $msg_data = explode("#", $subcomm);
+            $send_id = $msg_data[0];
+            $admin_msg = $msg_data[1];
+            $pesan = "ADMIN : ". $admin_msg;
+            sendMessage($send_id, $pesan, $token);
+            
+        }        
     }else{
 
         $pesan = "Aku tak tahu perintah itu, bisa coba yang lain? :/";
@@ -153,7 +171,9 @@ if($chat_id !== $user_id){
 }
 
 
+if($user_id != $admin_id){
+    sendMessage($chat_id, $pesan, $token);
+}
 
-sendMessage($chat_id, $pesan, $token);
 
 ?>
