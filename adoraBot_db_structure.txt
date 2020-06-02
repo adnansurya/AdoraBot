@@ -1,0 +1,31 @@
+AdoraBot_user 
+id_user - int(6) 
+acc_id - varchar(20) 
+acc_username - varchar(30) 
+acc_firstname - varchar(30) 
+acc_lastname - varchar(30) 
+
+AdoraBot_device 
+id_dev - int(6) 
+dev_token - varchar(20) 
+dev_name - varchar(30) 
+password - varchar(30) 
+
+AdoraBot_register 
+id_reg - int(10) 
+acc_id - int(6) 
+id_dev - int(6) 
+roles - varchar(10) 
+time - datetime 
+
+AdoraBot_report 
+id_report - int(20) 
+id_dev - int(6) 
+img - varchar(50) 
+time - datetime 
+
+AdoraBot_message 
+id_msg - int(15) 
+acc_id - int(6) 
+message - varchar(100) 
+time - datetime 
